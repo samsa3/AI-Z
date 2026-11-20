@@ -49,6 +49,7 @@ Use this to coordinate work between agents. Keep items small and actionable.
 ### 4.2 In Progress
 
 - [ ] TODO (@agent: name / role)
+- [ ] Agent policy engine + BRANE gateway prototype — branch `agent/policy-engine-prototype`, mock tests 8/8, real BRANE unverified (@agent: rodrigo-claude / agent dev)
 
 ### 4.3 Blocked
 
