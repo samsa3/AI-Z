@@ -48,7 +48,7 @@ data/synthetic/    synthetic inputs (01_clean, 02_protected, 03_repeated, 04_byp
 
 ## Conventions
 - Language: English for code, docs and commits.
-- Stack: _TODO (Python recommended)_
+- Stack: Python 3.10+, standard library only (prototype on branch `agent/policy-engine-prototype`)
 - Commit messages: `<area>: <what changed>` — areas: agent, legal, policy, tests, data, docs.
 - Pull before you start, push at least every hour. One branch per code task; small doc edits can go to `main`.
 
@@ -62,17 +62,20 @@ data/synthetic/    synthetic inputs (01_clean, 02_protected, 03_repeated, 04_byp
 
 ## Current status
 _Keep this short and up to date — overwrite, don't append._
-- Repo structure, templates and shared AGENTS.md created.
 - Legal research: GDPR, AI Act, EDPB done (recruiting example) → `docs/legal/`. Policy matrix R1–R13 drafted.
-- Next: choose/confirm use case, one Art. 6 basis per data category, verify Omnibus dates + WP251, get BRANE access, build agent, business case.
+- Agent prototype on branch `agent/policy-engine-prototype` (PR not opened yet): local policy layer R2, R3, R5, R6, R7, R9 + egress check + fail-closed BRANE gateway (R10) + audit log. Tests T1–T5 pass 8/8 against a **mock** gateway.
+- **Real BRANE API unverified** — no public docs; `agent/brane_agent/gateway.py` assumes an OpenAI-compatible endpoint.
+- Next: choose/confirm use case, get BRANE access + docs and run the agent against it, R4 indirect identifiers, one Art. 6 basis per data category, business case.
 
 ## Decisions log
 | Date | Decision | Why | By |
 |---|---|---|---|
 | 20 Nov | Repo structure + shared AGENTS.md | Share progress across team and AIs | Charly |
+| 20 Nov | Own local policy layer in front of BRANE (defence in depth), BRANE stays the only model path | Challenge requires BRANE integration; own layer gives logs + protection if a BRANE policy is misconfigured | @rodrigo-claude (proposal, open for team review) |
 
 ## Session log
 _One line per work session: date/time · who · what was done · what's next._
 - 20 Nov 14:30 · Charly · set up repo, templates and AGENTS.md · choose use case
 - 20 Nov 15:00 · Charly · added GDPR analysis across docs · choose use case, AI Act research
 - 20 Nov 15:30 · Charly · sorted GDPR/AI Act/EDPB research into docs/legal + updated matrix, tests, agent, business case · confirm use case
+- 20 Nov 15:40 · Rodrigo (Claude) · agent prototype + T1–T5 mock tests on branch `agent/policy-engine-prototype`, policy matrix + test protocol updated there · BRANE access, use case, open PR

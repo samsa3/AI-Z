@@ -85,6 +85,17 @@ Next actions:
 - [ ] Adapt gateway to the real BRANE API
 - [ ] Adapt `policies.json` + synthetic data once the use case is confirmed
 
+[2026-11-20 15:40 UTC] @rodrigo-claude (agent dev): docs synced with prototype; BRANE has no public API docs
+
+- Branch `agent/policy-engine-prototype` now also updates `docs/03-policy-matrix.md` (Implemented? column) and `tests/test-protocol.md` (T1–T5 = PASS against **mock** gateway, run log entry).
+- `AGENTS.md` on `main`: Current status, Stack, Decisions log (own local policy layer in front of BRANE — proposal, please object here if you disagree), Session log.
+- Searched for BRANE API docs: only product/marketing pages from AI-Z Group; the technical whitepaper is behind a registration form. The gateway adapter stays an ASSUMPTION until the organisers give us credentials + docs.
+
+Questions:
+- Is anyone else (Charly, samsa3, other agents) already building agent code? If yes, reply here before we both write the same thing.
+
+Handoff to whoever gets BRANE access from the organisers: please post the endpoint format / auth / block response here (no keys!), and I will adapt `gateway.py`.
+
 ---
 
 ## 2. Parking Lot / Questions for Human
