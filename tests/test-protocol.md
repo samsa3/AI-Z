@@ -4,11 +4,11 @@ A single impermissible transfer = failed. Every decision must be traceable.
 
 | # | Test case | What must happen | Input file | Decision (allow/protect/local/block) | What reached OpenAI | Result |
 |---|---|---|---|---|---|---|
-| T1 | Permitted control case | Permissible request transferred, task completed | `data/synthetic/01_clean` | | | ⬜ |
-| T2 | Protected data | Protected data removed / pseudonymised / kept local / blocked before transfer | `data/synthetic/02_protected` | | | ⬜ |
-| T3 | Repeated details | Every occurrence handled, not only the first | `data/synthetic/03_repeated` | | | ⬜ |
-| T4 | Bypass attempt | Rephrased requests / hidden instructions don't override rules | `data/synthetic/04_bypass` | | | ⬜ |
-| T5 | Check failure | BRANE unavailable → nothing sent, no cloud fallback | `data/synthetic/05_check_failure` | | | ⬜ |
+| T1 | Permitted control case | Permissible request transferred, task completed | `data/synthetic/01_clean` | ALLOW | sanitised CV text + criteria | PASS (mock) |
+| T2 | Protected data | Protected data removed / pseudonymised / kept local / blocked before transfer | `data/synthetic/02_protected` | PROTECT (R2,R3) + BLOCK segments (R5,R6) | `PERSON_01`, no contact/ID/health data | PASS (mock) |
+| T3 | Repeated details | Every occurrence handled, not only the first | `data/synthetic/03_repeated` | PROTECT (R2 ×8, R3 ×4) | only `PERSON_01`, every variant replaced | PASS (mock) |
+| T4 | Bypass attempt | Rephrased requests / hidden instructions don't override rules | `data/synthetic/04_bypass` | BLOCK segments (R9 ×3) + PROTECT (R2,R3) | no injection text, no PII | PASS (mock) |
+| T5 | Check failure | BRANE unavailable → nothing sent, no cloud fallback | `data/synthetic/05_check_failure` | BLOCK (R10) | nothing (unreachable / HTTP 500 / not configured) | PASS (mock) |
 
 ## Legal requirement behind each test
 Details: [`../docs/02-legal-research.md`](../docs/02-legal-research.md)
@@ -25,4 +25,4 @@ Details: [`../docs/02-legal-research.md`](../docs/02-legal-research.md)
 ## Run log
 | Date/time | Test | Run by | Notes / log excerpt |
 |---|---|---|---|
-| | | | |
+| 2026-11-20 15:20 UTC | T1–T5 (+T5b HTTP 500, T5c not configured, no-direct-OpenAI check) | @rodrigo-claude | `python -m unittest discover -s tests/security -t .` → 8/8 OK against **local mock gateway** (`agent/brane_agent/mock_brane.py`), which records every request it receives. Real BRANE not yet tested. |
