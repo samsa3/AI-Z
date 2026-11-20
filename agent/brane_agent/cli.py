@@ -24,7 +24,7 @@ def load_env(path: Path = ROOT / ".env") -> None:
         for line in path.read_text(encoding="utf-8").splitlines():
             if "=" in line and not line.lstrip().startswith("#"):
                 k, v = line.split("=", 1)
-                os.environ.setdefault(k.strip(), v.strip())
+                os.environ.setdefault(k.strip(), v.strip().strip('"'))
 
 
 def main() -> None:
@@ -38,7 +38,7 @@ def main() -> None:
     load_env()
     mock = MockBrane() if a.mock else None
     url = "http://127.0.0.1:9" if a.brane_down else (mock.url if mock else None)
-    gw = BraneGateway(url=url, timeout=3)
+    gw = BraneGateway(url=url, timeout=3 if (a.mock or a.brane_down) else 90)
     try:
         r = run(Path(a.file).read_text(encoding="utf-8"), DEFAULT_CRITERIA, gw, test_id=Path(a.file).stem)
     finally:
@@ -48,6 +48,8 @@ def main() -> None:
     print(f"run_id   : {r.run_id}\ndecision : {r.decision}\nreason   : {r.reason}")
     for e in r.events:
         print(f"  {e['rule']:<4} {e['measure']:<10} {e['category']:<28} x{e['count']}")
+    if r.brane:
+        print("brane    : " + ", ".join(f"{k[8:]}={v}" for k, v in r.brane.items()))
     if a.show_payload and r.payload_sent:
         print("\n--- payload handed to BRANE ---\n" + r.payload_sent)
     if r.reviewer_view:

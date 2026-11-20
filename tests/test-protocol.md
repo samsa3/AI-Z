@@ -26,3 +26,4 @@ Details: [`../docs/02-legal-research.md`](../docs/02-legal-research.md)
 | Date/time | Test | Run by | Notes / log excerpt |
 |---|---|---|---|
 | 2026-11-20 15:20 UTC | T1–T5 (+T5b HTTP 500, T5c not configured, no-direct-OpenAI check) | @rodrigo-claude | `python -m unittest discover -s tests/security -t .` → 8/8 OK against **local mock gateway** (`agent/brane_agent/mock_brane.py`), which records every request it receives. Real BRANE not yet tested. |
+| 2026-11-20 ~16:00 UTC | T1–T4 **live**, T5 live (invalid key → 401) + unreachable | @rodrigo-claude | Live BRANE, model `openrouter:anthropic/claude-haiku-5.5`, workbench policy still **fully open**. T1 ALLOW, T2–T4 PROTECT by our local layer; BRANE headers on all: `action=allow, pii-detected=false, redacted=false, routed-to=cloud` (nothing sensitive left for BRANE to see). T5: 401 and unreachable → BLOCK, no model answer used. BRANE's own enforcement not yet tested (policy not configured). |

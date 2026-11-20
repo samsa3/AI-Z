@@ -46,6 +46,7 @@ class RunResult:
     payload_sent: str | None = None  # exactly what was handed to BRANE (sanitised)
     model_output: str | None = None  # pseudonymised
     reviewer_view: str | None = None  # re-identified locally, for the human reviewer only
+    brane: dict = field(default_factory=dict)  # x-brane-* decision headers
 
 
 def _now() -> str:
@@ -91,10 +92,16 @@ def run(document: str, criteria: list[str], gateway: BraneGateway | None = None,
                 reidentified = reidentified.replace(token, name)
             result.reviewer_view = f"{reidentified}\n\n{HUMAN_REVIEW_NOTICE}"
             result.reason = "completed via BRANE"
+            result.brane = gateway.last_meta
         except GatewayBlocked as e:
+            result.brane = gateway.last_meta
             result.decision, result.reason = "BLOCK", f"BRANE blocked: {e}"
         except GatewayUnavailable as e:
-            result.decision, result.reason = "BLOCK", f"R10 fail-closed, nothing sent: {e}"
+            # A connection failure means nothing left this machine; a read timeout means the request
+            # may have reached BRANE (already sanitised + egress-checked) but its answer is discarded.
+            sent = "request may have reached BRANE, result discarded" if "timed out" in str(e).lower()                 else "rejected by BRANE, nothing forwarded to a model" if "HTTP" in str(e) \
+                else "nothing sent"
+            result.decision, result.reason = "BLOCK", f"R10 fail-closed ({sent}): {e}"
             result.events.append({"rule": "R10", "measure": "BLOCK", "category": "gateway_unavailable", "count": 1})
 
     if write_files:
@@ -112,6 +119,7 @@ def run(document: str, criteria: list[str], gateway: BraneGateway | None = None,
             "rules_fired": result.events,
             "sent_to_brane": result.payload_sent is not None,
             "payload_sha256": hashlib.sha256(payload.encode()).hexdigest() if result.payload_sent else None,
+            "brane": getattr(gateway, "last_meta", {}),  # BRANE's own decision headers
             "pseudonyms": sorted(res.mapping),  # tokens only, never the names
         })
     return result

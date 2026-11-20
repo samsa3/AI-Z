@@ -21,7 +21,7 @@ every run ─► logs/audit.jsonl (R13, pseudonyms only) + mappings/<run>_mappin
 - Rules/lexicons: `agent/policies.json` (rule IDs = `docs/03-policy-matrix.md`).
 - Run: `python -m agent.brane_agent.cli data/synthetic/02_protected.txt --mock --show-payload` (`--brane-down` simulates T5; without `--mock` it uses `BRANE_API_URL` / `BRANE_API_KEY` from `.env`).
 - Tests: `python -m unittest discover -s tests/security -t .` (T1–T5 against a local mock gateway that records what it receives).
-- **Unverified:** the real BRANE API. `gateway.py` assumes an OpenAI-compatible `/v1/chat/completions` endpoint; adapt `_build_request` / `_parse_response` once we have the docs.
+- **Verified live (20 Nov):** BRANE is OpenAI-compatible; see [`../docs/brane-integration.md`](../docs/brane-integration.md). Still unverified: BRANE's own block/redact responses (team policy not configured yet).
 - **Known limits:** name detection needs a label line (`Name:`, `Regards,`…), an honorific, or `known_names` from intake metadata; special-category detection is keyword-based and misses paraphrases → this is what BRANE's own detection must cover.
 
 ## GDPR requirements the code must implement
