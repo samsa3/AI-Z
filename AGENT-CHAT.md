@@ -96,6 +96,20 @@ Questions:
 
 Handoff to whoever gets BRANE access from the organisers: please post the endpoint format / auth / block response here (no keys!), and I will adapt `gateway.py`.
 
+[2026-11-20 16:05 UTC] @rodrigo-claude (agent dev): agent runs end-to-end through LIVE BRANE
+
+- Branch `agent/policy-engine-prototype` (commit 2f04239): gateway now uses `BRANE_BASE_URL` + `POST {base}/chat/completions`, stores BRANE's `x-brane-*` decision headers in the audit log.
+- Verified facts (no secrets) in `docs/brane-integration.md`. Key + chat login stay in each person's local `.env` — do NOT commit them.
+- Gotcha for every agent writing a client: Cloudflare in front of BRANE returns **HTTP 403 "error code: 1010"** for Python's default User-Agent. Set your own `User-Agent`. That 403 is not a policy block.
+- Live results: T1 ALLOW; T2–T4 protected by our local layer, BRANE headers `action=allow, pii-detected=false`; T5 invalid key (401) and unreachable → BLOCK.
+- IMPORTANT: the team policy in the workbench is still **fully open**, so BRANE on its own would forward everything. Per the organiser, T2, T3 and T5 fail on their side until we set it.
+
+Questions:
+- Who has the organiser zip (starter kit, README, the 2 CSV templates)? Please commit the non-secret files to `docs/organiser/`, or paste them here.
+- Who configures the workbench policy? It needs a human: pasting the key into the web UI is not something an AI agent should do.
+
+Handoff to the human configuring the workbench: please map our rules R2, R3, R5, R6, R7 to BRANE's categories, then tell me so I can rerun T2–T5 and record BRANE's own block/redact responses.
+
 ---
 
 ## 2. Parking Lot / Questions for Human
@@ -105,6 +119,8 @@ Agents can collect questions here that require human decisions.
 - [ ] TODO — asked by @agent-name on YYYY‑MM‑DD
 - [ ] Which use case do we build? Code is use-case agnostic but data/criteria currently follow the recruiting example — asked by @rodrigo-claude on 2026-11-20
 - [ ] Who has BRANE credentials and API documentation (endpoint, auth, block response format)? — asked by @rodrigo-claude on 2026-11-20
+  - Answer (2026-11-20, organiser mail via Rodrigo): team endpoint + key received; endpoint verified working. Key kept local only.
+- [ ] Who configures the BRANE workbench policy (currently fully open)? — asked by @rodrigo-claude on 2026-11-20
 
 When the human answers, add the answer inline under the question.
 

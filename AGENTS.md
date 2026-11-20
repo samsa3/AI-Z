@@ -16,6 +16,8 @@ Build an AI agent for a legally demanding business process. Every call to the AI
 4. Live demo & business case → `docs/04-business-case.md`
 + Test protocol for 5 pass/fail security tests → `tests/test-protocol.md`
 
+**Team name on BRANE: LarpAI. Hand-in deadline: Sat 21 Nov, 10:30 CET** — 2 CSVs (policy matrix; tests T1–T5 + 5 own edge cases). BRANE facts: `docs/brane-integration.md` (on branch `agent/policy-engine-prototype`).
+
 Scoring: Technology 40 · Legal & Governance 40 · Business impact 20. **One impermissible data transfer = security test failed.**
 
 ## Non-negotiable rules
@@ -56,16 +58,16 @@ data/synthetic/    synthetic inputs (01_clean, 02_protected, 03_repeated, 04_byp
 | Name | Role | Working on |
 |---|---|---|
 | Charly | | |
-| samsa3 | | |
-| | | |
-| | | |
+| Sam (samsa3) | | |
+| Rodrigo (@Rocasigle) | agent dev (with Claude) | agent + BRANE gateway |
+| Patricio | | |
 
 ## Current status
 _Keep this short and up to date — overwrite, don't append._
 - Legal research: GDPR, AI Act, EDPB done (recruiting example) → `docs/legal/`. Policy matrix R1–R13 drafted.
 - Agent prototype on branch `agent/policy-engine-prototype` (PR not opened yet): local policy layer R2, R3, R5, R6, R7, R9 + egress check + fail-closed BRANE gateway (R10) + audit log. Tests T1–T5 pass 8/8 against a **mock** gateway.
-- **Real BRANE API unverified** — no public docs; `agent/brane_agent/gateway.py` assumes an OpenAI-compatible endpoint.
-- Next: choose/confirm use case, get BRANE access + docs and run the agent against it, R4 indirect identifiers, one Art. 6 basis per data category, business case.
+- **Live BRANE works** (20 Nov ~16:00 UTC): T1–T4 run end-to-end through the team endpoint; T5 fail-closed verified (401 / unreachable). BRANE team policy is still **fully open** (25 categories = Send as Typed) → must be configured in the policy workbench.
+- Next: choose/confirm use case, configure BRANE workbench policy, get organiser starter-kit zip + CSV templates into repo, R4 indirect identifiers, one Art. 6 basis per data category, business case.
 
 ## Decisions log
 | Date | Decision | Why | By |
@@ -79,3 +81,4 @@ _One line per work session: date/time · who · what was done · what's next._
 - 20 Nov 15:00 · Charly · added GDPR analysis across docs · choose use case, AI Act research
 - 20 Nov 15:30 · Charly · sorted GDPR/AI Act/EDPB research into docs/legal + updated matrix, tests, agent, business case · confirm use case
 - 20 Nov 15:40 · Rodrigo (Claude) · agent prototype + T1–T5 mock tests on branch `agent/policy-engine-prototype`, policy matrix + test protocol updated there · BRANE access, use case, open PR
+- 20 Nov 16:05 · Rodrigo (Claude) · gateway connected to live BRANE, live T1–T5 run, docs/brane-integration.md · workbench policy, starter kit, use case
