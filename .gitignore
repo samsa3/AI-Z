@@ -1,0 +1,21 @@
+# Secrets — never commit real keys
+.env
+*.key
+
+# Pseudonymisation mappings stay in the protected environment
+mappings/
+*_mapping.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
