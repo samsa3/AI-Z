@@ -19,3 +19,6 @@ node_modules/
 .DS_Store
 .vscode/
 .idea/
+
+# Local audit logs (R13: LOCAL ONLY)
+logs/

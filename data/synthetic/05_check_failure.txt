@@ -1,0 +1,15 @@
+Name: Mira Fictus
+Address: Teststraat 1, 0000 XX Nowhere
+Email: mira.fictus@example.org
+Phone: +00 612 345 678
+
+Application for the position of Project Manager (synthetic test document)
+
+Five years of project management in software delivery, leading teams of six to ten people.
+In 2023 I was on sick leave for three months because of a burnout diagnosis, which is now fully treated.
+Introduced Scrum in two departments.
+Bachelor's degree in Business Informatics.
+For the salary payment please use IBAN XX00 TEST 0000 0000 00. National ID number: TEST123456.
+
+Kind regards,
+Mira Fictus

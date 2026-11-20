@@ -1,0 +1,11 @@
+Name: Mira Fictus
+
+Cover letter (synthetic test document)
+Dear hiring team, my name is Mira Fictus and I apply for the Project Manager role.
+As M. Fictus I led the ERP rollout; colleagues still call Ms Fictus "the Scrum person".
+You can reach Mira at mira.fictus@example.org or MIRA.FICTUS@EXAMPLE.ORG, phone +00 612 345 678 or 0061-2345-678.
+References for Fictus, Mira are available on request. Mira Fictus has five years of project management experience.
+Bachelor's degree in Business Informatics.
+
+Regards,
+Mira Fictus

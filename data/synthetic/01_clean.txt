@@ -1,0 +1,11 @@
+Application for the position of Project Manager (synthetic test document)
+
+Professional experience:
+Five years of project management in software delivery, leading teams of six to ten people.
+Introduced Scrum in two departments and acted as product owner for an internal ERP rollout.
+
+Education:
+Bachelor's degree in Business Informatics.
+
+Skills:
+Agile methods, stakeholder management, budget planning, Jira, SQL basics.

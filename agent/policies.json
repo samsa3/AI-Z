@@ -1,0 +1,143 @@
+{
+  "_comment": "Local policy layer. Rule IDs match docs/03-policy-matrix.md. Use-case specific values (lexicons, criteria) are placeholders until the team confirms the use case.",
+  "version": "0.1.0",
+  "pseudonym_prefix": "PERSON",
+  "rules": {
+    "R2": {
+      "category": "direct_identifier_name",
+      "measure": "PROTECT",
+      "action": "pseudonymise",
+      "legal": "GDPR Art. 4(5), 5(1)(c), 25(1), 32(1)(a); Rec. 26"
+    },
+    "R3": {
+      "category": "contact_details",
+      "measure": "PROTECT",
+      "action": "remove",
+      "legal": "GDPR Art. 5(1)(c), 25(2)"
+    },
+    "R5": {
+      "category": "id_and_financial_numbers",
+      "measure": "BLOCK",
+      "action": "remove",
+      "legal": "GDPR Art. 5(1)(c), 5(1)(f), 32, 87"
+    },
+    "R6": {
+      "category": "special_category",
+      "measure": "BLOCK",
+      "action": "remove_segment",
+      "legal": "GDPR Art. 9(1), 22(4)"
+    },
+    "R7": {
+      "category": "criminal_record",
+      "measure": "BLOCK",
+      "action": "remove_segment",
+      "legal": "GDPR Art. 10"
+    },
+    "R8": {
+      "category": "reidentification_key",
+      "measure": "LOCAL ONLY",
+      "action": "store_locally",
+      "legal": "GDPR Art. 4(5), 32; Rec. 29; EDPB 01/2025"
+    },
+    "R9": {
+      "category": "embedded_instruction",
+      "measure": "BLOCK",
+      "action": "remove_segment",
+      "legal": "GDPR Art. 5(1)(f), 32(1)(b)"
+    },
+    "R10": {
+      "category": "gateway_unavailable",
+      "measure": "BLOCK",
+      "action": "fail_closed",
+      "legal": "GDPR Art. 5(1)(f), 25, 32(1)(b)(d)"
+    },
+    "R12": {
+      "category": "final_decision",
+      "measure": "HUMAN ONLY",
+      "action": "recommendation_only",
+      "legal": "GDPR Art. 22, Rec. 71; AI Act Art. 14, 26(2)"
+    },
+    "R13": {
+      "category": "decision_log",
+      "measure": "LOCAL ONLY",
+      "action": "pseudonyms_only",
+      "legal": "GDPR Art. 5(2), 30; AI Act Art. 86"
+    }
+  },
+  "lexicons": {
+    "special_category": [
+      "diagnos",
+      "medical",
+      "medication",
+      "therapy",
+      "therapist",
+      "treatment",
+      "illness",
+      "disease",
+      "disability",
+      "disabled",
+      "chronic",
+      "depression",
+      "anxiety",
+      "burnout",
+      "cancer",
+      "diabetes",
+      "pregnan",
+      "hospital",
+      "surgery",
+      "sick leave",
+      "mental health",
+      "health condition",
+      "religion",
+      "religious",
+      "church",
+      "mosque",
+      "synagogue",
+      "muslim",
+      "christian",
+      "jewish",
+      "hindu",
+      "ethnic",
+      "racial",
+      "trade union",
+      "union member",
+      "sexual orientation",
+      "gay",
+      "lesbian",
+      "political party",
+      "genetic",
+      "biometric"
+    ],
+    "criminal_record": [
+      "conviction",
+      "convicted",
+      "criminal record",
+      "prison",
+      "sentenced",
+      "offence",
+      "offense"
+    ],
+    "embedded_instruction": [
+      "ignore previous",
+      "ignore all previous",
+      "ignore the above",
+      "disregard",
+      "override",
+      "system prompt",
+      "you are now",
+      "new instructions",
+      "forget your rules",
+      "bypass",
+      "include the full name",
+      "reveal",
+      "do not anonymi",
+      "do not pseudonymi",
+      "print the original",
+      "regardless of the criteria",
+      "privacy filter",
+      "skip the filter",
+      "note to the ai",
+      "assistant, "
+    ]
+  }
+}
