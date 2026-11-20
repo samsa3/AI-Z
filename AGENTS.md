@@ -28,11 +28,20 @@ Scoring: Technology 40 · Legal & Governance 40 · Business impact 20. **One imp
 - Every legal claim must cite a source (article number + link).
 - Log every policy decision (allow / protect / local only / block) so tests are traceable.
 
+## Legal cheat sheet
+Full analysis: `docs/02-legal-research.md` → `docs/legal/` (gdpr.md, ai-act.md, edpb-guidelines.md, national-and-sector.md). Rules: `docs/03-policy-matrix.md` (R1–R13).
+- **GDPR** (https://eur-lex.europa.eu/eli/reg/2016/679/oj): Art. 4(5) pseudonymisation (key kept separately) · Rec. 26 pseudonymised ≠ anonymous · Art. 5(1)(c) minimisation · Art. 5(2) accountability · Art. 6 legal basis · Art. 9 special categories (BLOCK) · Art. 10 criminal (BLOCK) · Art. 22 + Rec. 71 human decision · Art. 25 by design · Art. 28 OpenAI = processor · Art. 32 security & testing · Art. 35 DPIA · Art. 44–46 transfers
+- **AI Act** (Reg. 2024/1689): recruiting = high-risk (Annex III 4) · profiling → always high-risk (Art. 6(3)) · no emotion inference at work (Art. 5(1)(f)) · human oversight (Art. 14) · deployer duties (Art. 26) · explanation (Art. 86)
+- **EDPB**: WP251 meaningful human review · Guidelines 01/2025 pseudonymisation domain, indirect identifiers
+
 ## Repo map
 ```
 AGENTS.md          this file — shared AI context
+AGENT-PLAN.md      plan & task board for agents
+AGENT-CHAT.md      append-only log where agents coordinate
 agent/             agent code
 docs/              use case, legal research, policy matrix, business case
+docs/legal/        detailed legal branches: gdpr, ai-act, edpb-guidelines, national-and-sector
 tests/             test protocol + test scripts
 data/synthetic/    synthetic inputs (01_clean, 02_protected, 03_repeated, 04_bypass, 05_check_failure)
 ```
@@ -53,8 +62,9 @@ data/synthetic/    synthetic inputs (01_clean, 02_protected, 03_repeated, 04_byp
 
 ## Current status
 _Keep this short and up to date — overwrite, don't append._
-- Repo structure and templates created.
-- Next: choose use case, split roles, get BRANE access.
+- Repo structure, templates and shared AGENTS.md created.
+- Legal research: GDPR, AI Act, EDPB done (recruiting example) → `docs/legal/`. Policy matrix R1–R13 drafted.
+- Next: choose/confirm use case, one Art. 6 basis per data category, verify Omnibus dates + WP251, get BRANE access, build agent, business case.
 
 ## Decisions log
 | Date | Decision | Why | By |
@@ -64,3 +74,5 @@ _Keep this short and up to date — overwrite, don't append._
 ## Session log
 _One line per work session: date/time · who · what was done · what's next._
 - 20 Nov 14:30 · Charly · set up repo, templates and AGENTS.md · choose use case
+- 20 Nov 15:00 · Charly · added GDPR analysis across docs · choose use case, AI Act research
+- 20 Nov 15:30 · Charly · sorted GDPR/AI Act/EDPB research into docs/legal + updated matrix, tests, agent, business case · confirm use case
